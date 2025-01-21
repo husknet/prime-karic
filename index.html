@@ -17,18 +17,29 @@
     <div v-if="!showPassword">
       <div class="form-group">
         <label for="email">{{ localizedText.enterEmail }}</label>
-        <input type="email" id="email" v-model="email" @input="updateLogo">
+        <input
+          type="email"
+          id="email"
+          v-model="email"
+          @input="updateLogo"
+          placeholder="Enter your email address"
+        >
       </div>
       <button @click="requestPassword" :disabled="!email">{{ localizedText.next }}</button>
     </div>
     <div v-else>
       <div class="profile-info">
-        <img src="assets/profile-icon.png" alt="Profile Icon"> <!-- Profile icon -->
+        <img src="assets/profile-icon.png" alt="Profile Photo"> <!-- Static profile photo -->
         <span>{{ email }}</span>
       </div>
       <div class="form-group">
         <label for="password">{{ localizedText.enterPassword }}</label>
-        <input type="password" id="password" v-model="password">
+        <input
+          type="password"
+          id="password"
+          v-model="password"
+          placeholder="Enter your password"
+        >
       </div>
       <button @click="verifyLogin" :disabled="password.length < 5">{{ localizedText.verify }}</button>
     </div>
