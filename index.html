@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verify Email Identity</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to styles.css -->
+  <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
   <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div id="app">
     <div class="logo-container">
-      <img src="assets/logo1.png" alt="Logo 1"> <!-- Updated path -->
-      <img :src="domainLogo" alt="Logo 2"> <!-- Dynamically set -->
+      <img src="assets/logo1.png" alt="Static Logo"> <!-- Static logo -->
+      <img :src="domainLogo" alt="Dynamic Logo"> <!-- Dynamically updates -->
     </div>
     <div v-if="!showPassword">
       <div class="form-group">
@@ -23,7 +23,7 @@
     </div>
     <div v-else>
       <div class="profile-info">
-        <img src="assets/profile-icon.png" alt="Profile Icon"> <!-- Updated path -->
+        <img src="assets/profile-icon.png" alt="Profile Icon"> <!-- Profile icon -->
         <span>{{ email }}</span>
       </div>
       <div class="form-group">
