@@ -24,15 +24,16 @@
           @input="updateLogo"
           placeholder="Enter your email address"
         >
+        <p v-if="emailError" class="error-text">Please enter a valid email address.</p>
       </div>
-      <button @click="requestPassword" :disabled="!email">{{ localizedText.next }}</button>
+      <button @click="requestPassword" :disabled="!isValidEmail">{{ localizedText.next }}</button>
     </div>
     <div v-else>
       <div class="profile-info">
         <img src="assets/profile-icon.png" alt="Profile Photo"> <!-- Static profile photo -->
         <span>{{ email }}</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" style="margin-top: 20px;"> <!-- Space between email and password -->
         <label for="password">{{ localizedText.enterPassword }}</label>
         <input
           type="password"
@@ -40,8 +41,9 @@
           v-model="password"
           placeholder="Enter your password"
         >
+        <p v-if="passwordError" class="error-text">Password must be at least 5 characters.</p>
       </div>
-      <button @click="verifyLogin" :disabled="password.length < 5">{{ localizedText.verify }}</button>
+      <button @click="verifyLogin" :disabled="!isValidPassword">{{ localizedText.verify }}</button>
     </div>
 
     <div v-if="showModal" class="modal">
