@@ -1,9 +1,3 @@
-.error-text {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -23,16 +17,44 @@ body {
   border-radius: 10px;
 }
 
+/* Logo Container */
+.logo-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 .logo-container img {
   width: 40px;
   height: 40px;
 }
 
-.profile-info img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px; /* Add spacing below the label */
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: #f9f9f9; /* Light background for the input */
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  background: #fff; /* Highlighted background on focus */
 }
 
 button {
@@ -42,6 +64,7 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -53,4 +76,51 @@ button:disabled {
 
 button:hover:not(:disabled) {
   background: #0056b3;
+}
+
+/* Profile Info Styling */
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Add space between email and password input */
+}
+
+.profile-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content p {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
 }
