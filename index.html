@@ -22,7 +22,6 @@
           id="email"
           v-model="email"
           @input="updateLogo"
-          @blur="validateEmail" <!-- Validation on blur -->
           placeholder="Enter your email address"
         >
         <p v-if="emailError" class="error-text">Please enter a valid email address.</p>
@@ -40,7 +39,6 @@
           type="password"
           id="password"
           v-model="password"
-          @blur="validatePassword" <!-- Validation on blur -->
           placeholder="Enter your password"
         >
         <p v-if="passwordError" class="error-text">Password must be at least 5 characters.</p>
