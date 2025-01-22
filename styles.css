@@ -10,7 +10,7 @@ body {
 }
 
 #app {
-  width: 400px; /* Keep the block size larger */
+  width: 300px; /* Keep the block size larger */
   background: white;
   padding: 40px; /* Keep the block padding larger */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Adjusted for larger block */
@@ -43,8 +43,8 @@ label {
 }
 
 input {
-  width: 60%;
-  height: 32px; /* Reverted to smaller size */
+  width: 70%;
+  height: 35px; /* Reverted to smaller size */
   padding: 10px; /* Reverted to original padding */
   border: 1px solid #ddd; /* Original border */
   border-radius: 5px;
@@ -60,7 +60,7 @@ input:focus {
 }
 
 button {
-  width: 50%;
+  width: 70%;
   height: 35px; /* Reverted to smaller size */
   padding: 10px; /* Reverted to original padding */
   background: #007bff;
