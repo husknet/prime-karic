@@ -10,61 +10,62 @@ body {
 }
 
 #app {
-  width: 300px;
+  width: 600px; /* Doubled */
   background: white;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  padding: 40px; /* Doubled */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Adjusted for larger size */
+  border-radius: 20px; /* Slightly increased */
 }
 
 /* Logo Container */
 .logo-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 40px; /* Doubled */
 }
 
 .logo-container img {
-  width: 40px;
-  height: 40px;
+  width: 80px; /* Doubled */
+  height: 80px; /* Doubled */
 }
 
 /* Form Group Styling */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 30px; /* Doubled */
 }
 
 label {
   display: block;
-  font-size: 14px;
-  margin-bottom: 5px; /* Add spacing below the label */
+  font-size: 28px; /* Doubled */
+  margin-bottom: 10px; /* Increased */
 }
 
 input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-top: 5px;
-  font-size: 14px;
+  height: 50px; /* Doubled */
+  padding: 20px; /* Doubled */
+  border: 2px solid #ddd; /* Slightly thicker */
+  border-radius: 10px; /* Adjusted for larger size */
+  font-size: 24px; /* Doubled */
   box-sizing: border-box;
-  background: #f9f9f9; /* Light background for the input */
+  background: #f9f9f9;
 }
 
 input:focus {
   border-color: #007bff;
   outline: none;
-  background: #fff; /* Highlighted background on focus */
+  background: #fff;
 }
 
 button {
   width: 100%;
-  padding: 10px;
+  height: 60px; /* Doubled */
+  padding: 20px; /* Doubled */
   background: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 14px;
+  border-radius: 10px; /* Adjusted for larger size */
+  font-size: 24px; /* Doubled */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -82,20 +83,21 @@ button:hover:not(:disabled) {
 .profile-info {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* Add space between email and password input */
+  margin-bottom: 40px; /* Doubled */
 }
 
 .profile-info img {
-  width: 40px;
-  height: 40px;
+  width: 80px; /* Doubled */
+  height: 80px; /* Doubled */
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 20px; /* Doubled */
 }
 
+/* Error Text */
 .error-text {
   color: red;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 18px; /* Slightly increased for readability */
+  margin-top: 10px; /* Adjusted */
 }
 
 /* Modal Styling */
@@ -113,14 +115,14 @@ button:hover:not(:disabled) {
 
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 40px; /* Doubled */
+  border-radius: 10px; /* Adjusted */
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Adjusted for larger size */
 }
 
 .modal-content p {
-  font-size: 16px;
+  font-size: 32px; /* Doubled */
   font-weight: bold;
   margin: 0;
 }
