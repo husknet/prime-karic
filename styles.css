@@ -10,7 +10,7 @@ body {
 }
 
 #app {
-  width: 600px; /* Keep the block size larger */
+  width: 400px; /* Keep the block size larger */
   background: white;
   padding: 40px; /* Keep the block padding larger */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Adjusted for larger block */
