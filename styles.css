@@ -27,8 +27,8 @@ body {
 }
 
 .logo-container img {
-  width: 90px; /* Size for logos */
-  height: 60px;
+  width: 100px; /* Size for logos */
+  height: 80px;
 }
 
 /* Form Group Styling */
