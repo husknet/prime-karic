@@ -43,8 +43,8 @@ label {
 }
 
 input {
-  width: 50%;
-  height: 25px; /* Reverted to smaller size */
+  width: 60%;
+  height: 32px; /* Reverted to smaller size */
   padding: 10px; /* Reverted to original padding */
   border: 1px solid #ddd; /* Original border */
   border-radius: 5px;
